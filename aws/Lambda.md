@@ -36,6 +36,31 @@ zip -r9 ../schedulecheck.zip *
 ![Attach Policy](img/lambda_01.png)
 
 
+## イベント
+### 定期実行(rate / cron)
+定期実行は、CloudWatch Events から設定する。  
+
+![Attach Policy](img/lambda_02.png)
+
+トリガー追加時に、スケジュール式を設定することで、意図したタイミングで動作することができる。
+
+![Attach Policy](img/lambda_03.png)
+
+一度、設定した後は、CloudWatch サービスの方で設定変更することになる。
+
+![Attach Policy](img/lambda_04.png)
+
+___
+
+CloudWatch Event の cron 式を変更する。  
+ここでの設定方式については、
+[Rate または Cron を使用したスケジュール式](http://docs.aws.amazon.com/ja_jp/lambda/latest/dg/tutorial-scheduled-events-schedule-expressions.html) を参照。  
+
+設定する時間は UTC 時間になるので、日本時間（JST）から -9時間した値を設定する。
+
+![Attach Policy](img/lambda_05.png)
+
+
 
 
 
