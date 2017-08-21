@@ -57,6 +57,14 @@ obj.put(Body = json.dumps(" {'test' : 'テスト'} ", ensure_ascii=False,))
 ensure_ascii=False がないと、エスケープされる。
 (pythonでjsonを扱う時、日本語をエスケープさせない方法)[http://qiita.com/tadokoro/items/131268c9a0fd1cf85bf4]
 
+putをすると、既存のオブジェクトに上書きしたとしても、既存のアクセス権限がリセットされてしまうので、明示的に指定が必要。
+
+``` python
+response = object.put(
+    ACL='private'|'public-read'|'public-read-write'|'authenticated-read'|'aws-exec-read'|'bucket-owner-read'|'bucket-owner-full-control',
+```
+
+
 
 ## 参考
 [Python(boto3)でS3にデータをファイル保存せず直接アップロードする方法](http://dev.classmethod.jp/cloud/aws/upload-json-directry-to-s3-with-python-boto3/)

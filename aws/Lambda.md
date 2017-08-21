@@ -56,7 +56,8 @@ CloudWatch Event の cron 式を変更する。
 ここでの設定方式については、
 [Rate または Cron を使用したスケジュール式](http://docs.aws.amazon.com/ja_jp/lambda/latest/dg/tutorial-scheduled-events-schedule-expressions.html) を参照。  
 
-設定する時間は UTC 時間になるので、日本時間（JST）から -9時間した値を設定する。
+設定する時間は UTC 時間になるので、日本時間（JST）から -9時間した値を設定する。  
+午前０時に動作させたいのであれば、 0:00 - 9:00 => 15:00 となる。
 
 ![Attach Policy](img/lambda_05.png)
 
