@@ -36,8 +36,156 @@ schedule = soup.find("div")
 schedule = soup.find("div", attrs={"class": "schedule_area"})
 ```
 
+## find all/siblings/next
+
+``` python
+from bs4 import BeautifulSoup
+
+html_doc = """
+<html><head><title>The Dormouse's story</title></head>
+<body>
+<div class='cls1'>
+<p>p-1-1</p>
+<p>p-1-2</p>
+<p>p-1-3</p>
+</div>
+<div class='cls2'>
+<p>p-2-1</p>
+<p>p-2-2</p>
+<p>p-2-3</p>
+<b>bold</b>
+</div>
+<div class='cls3'>
+<p>p-3-1</p>
+<p>p-3-2</p>
+<p>p-3-3</p>
+</div>
+<div class='cls4'>
+<p>p-4-1</p>
+<p>p-4-2</p>
+<p>p-4-3</p>
+</div>
+"""
+
+soup = BeautifulSoup(html_doc,"html.parser")
+
+div_class2 = soup.find("div", attrs={"class":"cls2"})
+print("<<children>>")
+for child in div_class2.children:
+    print('"{}"'.format(child))
 
 
+ps = div_class2.find_all_next("p")
+print("<<all next p>>")
+print(ps)
+
+ps = div_class2.find_next_siblings("p")
+print("<<next siblings p>>")
+print(ps)
+
+divs = div_class2.find_next_siblings("div")
+print("<<next sigbling div>>")
+print(divs)
+
+ps = div_class2.find_all("p")
+print("<<find all p in cls2>>")
+print(ps)
+```
+[結果]
+
+```
+$ python bssandbox.py 
+<<children>>
+"
+"
+"<p>p-2-1</p>"
+"
+"
+"<p>p-2-2</p>"
+"
+"
+"<p>p-2-3</p>"
+"
+"
+"<b>bold</b>"
+"
+"
+<<all next p>>
+[<p>p-2-1</p>, <p>p-2-2</p>, <p>p-2-3</p>, <p>p-3-1</p>, <p>p-3-2</p>, <p>p-3-3</p>, <p>p-4-1</p>, <p>p-4-2</p>, <p>p-4-3</p>]
+<<next siblings p>>
+[]
+<<next sigbling div>>
+[<div class="cls3">
+<p>p-3-1</p>
+<p>p-3-2</p>
+<p>p-3-3</p>
+</div>, <div class="cls4">
+<p>p-4-1</p>
+<p>p-4-2</p>
+<p>p-4-3</p>
+</div>]
+<<find all p in cls2>>
+[<p>p-2-1</p>, <p>p-2-2</p>, <p>p-2-3</p>]
+```
+
+## get_text()
+element に対して、get_text() を呼ぶと、内部のコンテンツが取得できる。
+
+``` python
+html_doc = """
+<p>p-1-1</p>
+"""
+
+soup = BeautifulSoup(html_doc,"html.parser")
+
+p_element = soup.find("p")
+print(p_element.get_text())
+```
+
+ 
+```
+$ python bssandbox.py 
+p-1-1
+
+```
+
+その element が、子 element を持っている場合、その子 element のテキストも含めて出力される。
+
+``` python
+html_doc = """
+<p><div>uuu</div>p-1-1</p>
+"""
+
+soup = BeautifulSoup(html_doc,"html.parser")
+
+p_element = soup.find("p")
+print(p_element.get_text())
+```
+
+```
+$ python bssandbox.py 
+uuup-1-1
+
+```
+## attributes の取得
+attribute は、メソッドではなく、連想配列から取得する。
+
+``` python
+html_doc = """
+<p onclick='onclick_attribute'>p-1-1</p>
+"""
+
+soup = BeautifulSoup(html_doc,"html.parser")
+
+p_element = soup.find("p")
+print(p_element['onclick'])
+```
+
+```
+$ python bssandbox.py 
+onclick_attribute
+
+```
 
 ## 参考
 
