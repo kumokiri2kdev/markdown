@@ -186,6 +186,16 @@ $ python bssandbox.py
 onclick_attribute
 
 ```
+## element の置換
+
+下記の処理で、\<br> を "-" に入れ替わる。
+
+``` python
+psb = soup.find("br")
+if psb:
+	psb.replace_with('-')
+```
+
 
 ## 参考
 
