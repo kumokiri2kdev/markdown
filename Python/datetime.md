@@ -38,6 +38,17 @@ today = dt.datetime.now()
 
 ```
 
+## JST で取得する場合
+``` python
+from pytz import timezone
+from datetime import datetime
+
+now = datetime.now()
+jst_now = timezone('Asia/Tokyo').localize(now)
+```
+
+
+
 ## 各要素へのアクセス
 ### 年
 ``` python
