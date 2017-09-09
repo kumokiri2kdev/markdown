@@ -24,7 +24,7 @@ git push -u origin master
 
 ```
 git config --global core.excludesfile ~/.gitignore_global
-vi /Users/seiichikataoka/.gitignore_global
+vi /Users/hoge/.gitignore_global
 ```
 
 gitignore_global  
