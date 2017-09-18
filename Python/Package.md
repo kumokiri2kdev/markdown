@@ -61,7 +61,49 @@ from .
 ちなみに、全てのコードが同じディレクトリにあれば、そもそも、気にする必要がないが、たまたまうまく行っていると思った方が良い。
 import や from で指定するパスは、実行フォルダからのパス。
 
+このサブディレクトリの親ディレクトリにある main.py から呼び出す場合、
 
+``` python
+import pkg.sub_class as sc
+  
+if __name__ == '__main__':
+    b = sc.B()
+    b.test2()
+    
+    c = sc.C()
+    c.test2()
+```
+とする。
+
+`from pkg import sub_class as sc` 　
+
+でも構わない。
+
+
+## サブディレクトリと同じ階層にあるフォルダからサブディレクトリのパッケージを利用する
+- pkg
+	- super_class.py  
+	- sub_class.py
+- test
+	- main.py 	
+
+という構成の場合、main.py は、
+
+``` python
+import sys
+
+sys.path.append('../')
+
+from pkg import sub_class as sc
+  
+if __name__ == '__main__':
+    b = sc.B()
+    b.test2()
+    
+    c = sc.C()
+    c.test2()
+```
+となる。
 
 
 

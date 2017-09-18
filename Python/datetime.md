@@ -62,8 +62,10 @@ date_time = date_time + dt.timedelta(days=3)
 ```
 ### 日数の計算
 ``` python
+from datetime import timedelta
+
 today = date_time.now()
-yesterday = today - td.timedelta(days=-1)
+yesterday = today - timedelta(days=-1)
 
 diff = today - yesterday
 
@@ -73,6 +75,14 @@ print(diff.days)
 ```
 -1
 ```
+timedelta で指定できるのは
+
+- days
+- seconds
+- microseconds
+
+のみ。
+
 ## timestamp
 ``` python
 print(dt.datetime.now().timestamp())

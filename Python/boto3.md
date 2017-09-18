@@ -63,6 +63,74 @@ response = cloud_watch.describe_rule(Name='ratetest')
 print("{} state is changed to {}".format(response['Name'], response['State']))
 ```
 
+## s3
+
+### バケッドの一覧
+``` python
+import boto3
+import sys
+
+client = boto3.client('s3')
+
+response = client.list_buckets()
+
+if response['ResponseMetadata']['HTTPStatusCode'] != 200:
+    print("Response Error")
+    sys.exit(1)
+
+for bucket in response['Buckets']:
+    print("Bucket Name : {}".format(bucket['Name']))
+```
+```
+Bucket Name : girldscheule
+Bucket Name : girlsscheduledata
+```
+
+### objectリストの取得
+
+``` python
+import boto3
+
+BACKET_NAME = 'jradatabucket'
+PREFIX = 'aa'
+
+client = boto3.client('s3')
+
+response = client.list_objects(
+    Bucket= BACKET_NAME,
+    Prefix=PREFIX
+)
+
+for content in response['Contents']:
+    print("Name : {}".format(content['Key']))
+```
+
+```
+Name : aaa
+Name : aac/
+Name : aac/fdsa/
+Name : aad/
+```
+
+
+
+### バケッド以下にフォルダを作成
+``` python
+import boto3
+
+BACKET_NAME = 'hoge'
+FOLDER_NAME = 'hoge_hoge/'
+
+s3 = boto3.resource('s3')
+bucket = s3.Bucket(BACKET_NAME)
+
+bucket.put_object(Key=FOLDER_NAME)
+```
+
+Key に 指定する文字列の最後を '/' にすることが重要。
+付いていないと単にファイルが作られる。
+
+
 
 ### 参考
 [CloudWatchEvents](https://boto3.readthedocs.io/en/latest/reference/services/events.html)
