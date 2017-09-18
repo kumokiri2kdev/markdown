@@ -186,6 +186,23 @@ $ python bssandbox.py
 onclick_attribute
 
 ```
+上記のように、連想配列から取得できるが、
+
+``` python
+'onclick' in p_element
+```
+とやってしまうと、判定ができない。  
+※常に False が返ってしまう。
+
+存在チェックは
+
+``` python
+anchor.has_attr('onclick')
+```
+とする。
+
+
+
 ## element の置換
 
 下記の処理で、\<br> を "-" に入れ替わる。
