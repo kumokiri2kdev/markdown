@@ -130,6 +130,13 @@ bucket.put_object(Key=FOLDER_NAME)
 Key に 指定する文字列の最後を '/' にすることが重要。
 付いていないと単にファイルが作られる。
 
+### バゲッド・フォルダへのオブジェクトアップロード
+
+``` python
+wobj = s3.Object(BACKET_NAME, key)
+wobj.put(Body = json.dumps(output, ensure_ascii=False))
+```
+key が aaa/bbb.json のようになっていれば、ファイルが、バゲットの下のフォルダ aaa の下に bbb.json として置かれる。
 
 
 ### 参考
