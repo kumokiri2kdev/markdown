@@ -32,6 +32,18 @@ print(date_time)
 2017-08-09 00:00:00
 ```
 
+### yyyy/mm/dd 00:00 形式
+``` python
+date_str = '17/08/09 19:01'
+date_time = dt.strptime(date_str, '%y/%m/%d %H:%M')
+
+print(date_time)
+
+```
+```
+2017-08-09 00:00:00
+```
+
 ## 今日の datetime
 ``` python
 today = dt.datetime.now()
