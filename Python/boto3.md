@@ -143,5 +143,62 @@ key が aaa/bbb.json のようになっていれば、ファイルが、バゲ�
 [CloudWatchEvents](https://boto3.readthedocs.io/en/latest/reference/services/events.html)
 
 
+## EC2
+
+### EC2 instance 一覧
+
+``` python
+ec2 = boto3.resource('ec2')
+
+for instance in ec2.instances.all():
+	print(i.state)
+```
+
+```
+{'Code': 80, 'Name': 'stopped'}
+{'Code': 80, 'Name': 'stopped'}
+```
+
+### 特定 instance の状態表示
+
+``` python
+ec2 = boto3.resource('ec2')
+
+instance = ec2.Instance('i-0b8b22ecf7e7f4415')
+print(instance.state)
+```
+
+```
+{'Code': 80, 'Name': 'stopped'}
+```
+
+### 特定インスタンスの起動
+
+``` python
+ec2 = boto3.resource('ec2')
+
+instance = ec2.Instance('i-0b8b22ecf7e7f4415')
+instance.start()
+```
+
+```
+{'ResponseMetadata': {'HTTPHeaders': {'content-type': 'text/xml;charset=UTF-8',
+   'date': 'Thu, 28 Sep 2017 12:43:25 GMT',
+   'server': 'AmazonEC2',
+   'transfer-encoding': 'chunked',
+   'vary': 'Accept-Encoding'},
+  'HTTPStatusCode': 200,
+  'RequestId': '945e3315-2bc2-47db-b608-5f3008bb0fb3',
+  'RetryAttempts': 0},
+ 'StartingInstances': [{'CurrentState': {'Code': 0, 'Name': 'pending'},
+   'InstanceId': 'i-0b8b22ecf7e7f4415',
+   'PreviousState': {'Code': 80, 'Name': 'stopped'}}]}
+
+```
+
+
+
+
+
 
 
