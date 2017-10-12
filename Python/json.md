@@ -1,5 +1,12 @@
 # json
 
+## ファイルから読み込み
+
+``` python
+with open('kyoto/' + file, 'r') as rfp:
+	jsonData = json.load(rfp)
+```
+
 ## dict から json を出力
 
 ``` python
