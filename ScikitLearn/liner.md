@@ -112,7 +112,7 @@ Test set score ] 0.61
 この場合は、訓練データのみが適合率が高く、テストデータでは適合率が悪いので、過剰適合と考えられる。
 
 ## リッジ回帰
-リッジ回帰も線形モデルの一つであるが、ここの訓練データが傾きに与えると影響度を下げて過剰適合を防ぐモデルである。
+リッジ回帰も線形モデルの一つであるが、個々の特徴量が出力に与える影響力をなるべく小さくてする方法である。
 上記の 105個の特徴量をリッジ回帰で測定した場合、
 
 ``` python
@@ -184,6 +184,101 @@ if __name__ == "__main__":
 
 ![](img/liner-regression-ridge-graph.png)
 
+
+## Lasso
+
+Lasso は、Ridge と同様に個々の特徴量が出力に与える影響力を小さくてする方法である。
+Ridge との差分は、小さくするにあたり、いくつかの特徴量の影響を完全にゼロにする。
+
+下記は、alpha の値を変えて３回試行するサンプルである。
+
+``` python
+import numpy as np
+import mglearn
+
+from sklearn.linear_model import Lasso
+from sklearn.model_selection import train_test_split
+from mglearn.datasets import load_extended_boston
+
+def linear_regression_boston(alpha):
+    X, y = load_extended_boston()
+    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+
+    lasso = Lasso(alpha=alpha, max_iter=100000).fit(X_train, y_train)
+    print("-------------------")
+    print("[alpha : {}]Training set score: {:.2f}".format(alpha, lasso.score(X_train, y_train)))
+    print("[alpha : {}]Test set score: {:.2f}".format(alpha, lasso.score(X_test, y_test)))
+    print("[alpha : {}]Number of features used: {}".format(alpha, np.sum(lasso.coef_ != 0)))
+    
+if __name__ == "__main__":
+    alpha = [1.0, 0.01, 0.0001]
+
+    for val in alpha:
+      linear_regression_boston(val)
+      
+```
+
+```
+-------------------
+[alpha : 1.0]Training set score: 0.29
+[alpha : 1.0]Test set score: 0.21
+[alpha : 1.0]Number of features used: 4
+-------------------
+[alpha : 0.01]Training set score: 0.90
+[alpha : 0.01]Test set score: 0.77
+[alpha : 0.01]Number of features used: 33
+-------------------
+[alpha : 0.0001]Training set score: 0.95
+[alpha : 0.0001]Test set score: 0.64
+[alpha : 0.0001]Number of features used: 94
+```
+
+下記は、0.0001 - 1.0 の間での最適な alpha を求めるサンプルである。
+
+``` python
+import numpy as np
+import matplotlib.pyplot as plt
+import mglearn
+
+from sklearn.linear_model import Lasso
+from sklearn.model_selection import train_test_split
+from mglearn.datasets import load_extended_boston
+
+def lasso_fit(alpha, X_train, X_test, y_train, y_test):
+    lasso = Lasso(alpha=alpha, max_iter=100000).fit(X_train, y_train)
+    return lasso.score(X_train, y_train), lasso.score(X_test, y_test)
+
+def linear_regression_boston():
+    X, y = load_extended_boston()
+    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+    limit = np.arange(0.0001, 1.0001, 0.001)
+
+    training_scores = np.zeros(len(limit), dtype=float)
+    test_scores = np.zeros(len(limit), dtype=float)
+
+    best_score = 0.0
+    best_alpha = 0.0
+    for i, alpha in enumerate(limit):
+      training_scores[i], test_scores[i] = lasso_fit(alpha, X_train, X_test, y_train, y_test)
+      if best_score < test_scores[i]:
+        best_score = test_scores[i]
+        best_alpha = alpha
+
+    print("Best Alpha : {}, Best Score : {}".format(best_alpha, best_score))
+
+    plt.plot(limit, test_scores, label="Test Score")
+    plt.plot(limit, training_scores, label="Tranining Score")
+    plt.legend()
+    plt.show()
+    
+if __name__ == "__main__":
+    linear_regression_boston()
+```
+```
+Best Alpha : 0.0041, Best Score : 0.7819745482315341
+```
+
+![](img/liner-regression-lasso-graph.png)
 
 
 
