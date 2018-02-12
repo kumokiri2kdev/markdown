@@ -59,7 +59,10 @@ now = datetime.now()
 jst_now = timezone('Asia/Tokyo').localize(now)
 ```
 
-
+## UTCで取得する場合
+``` python
+datetime.utcnow()
+```
 
 ## 各要素へのアクセス
 ### 年
