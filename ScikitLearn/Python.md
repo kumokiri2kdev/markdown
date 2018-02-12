@@ -141,6 +141,17 @@ array([[0],
        [9]])
 ```
 
+１次元の配列にする場合、ravel を使用する。
+
+
+``` python
+ary = np.arange(0,10, 1).reshape(5,2)
+ary.ravel()
+```
+```
+array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+```
+
 ### 配列から特定の列を抽出
 
 ``` python
@@ -216,8 +227,86 @@ plt.pause(0.5)
 ```
 ![](img/plt_line.png)
 
+### プロット
+
+plot() の３番目の引数を指定すると、プロットした図になる。
+
+``` python
+plt.plot(X_data, y_data, "o")
+```
+
+![](img/plt_plot.png)
 
 
+### ヒストグラム
+
+``` python
+plt.hist(np.random.randn(1000))
+```
+![](img/plt_hist.png)
+
+### 等高線
+
+0.5 のところ（Zの値が 0.5になる所）に、等高線を引く。
+
+``` python
+	
+import numpy as np
+import matplotlib.pyplot as plt
+ 
+n = 100
+x = np.linspace(-1, 1, n)
+y = np.linspace(-1, 1, n)
+ 
+X, Y = np.meshgrid(x, y)
+Z = np.sqrt(X**2 + Y**2)
+
+plt.contour(X, Y, Z, levels=[0.5])
+
+# Set aspect as square
+plt.gca().set_aspect('equal')
+
+plt.pause(0.5)
+#plt.show()
+```
+
+![](img/plt_contour.png)
+
+### 横棒グラフ
+
+``` python
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.arange(1,6)
+y = np.array([2.3, 3.2, 4.1, 3.2, 1.1])
+
+plt.barh(x, y)
+plt.yticks(x, ["a", "b", "c", "d", "e"])
+
+plt.pause(0.5)
+#plt.show()
+```
+
+![](img/plt_hbar.png)
 
 
+## sickit learn
 
+### train_test_split
+
+``` python
+from sklearn.model_selection import train_test_split
+
+X, y = make_wave(n_samples=60)
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
+
+```
+
+### load_breast_cancer
+ 
+``` python
+from sklearn.datasets import load_breast_cancer
+ 
+cancer = load_breast_cancer()
+```

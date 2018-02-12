@@ -6,6 +6,8 @@
 2. 教師あり学習
 	* [k-最近傍法](k-NN.md)
 	* [線形回帰](liner.md)
+	* [線形分類](liner_classifier.md)
+	* [決定木](decision_tree.md)
 *  
 
 
