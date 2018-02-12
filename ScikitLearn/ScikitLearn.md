@@ -8,6 +8,8 @@
 	* [線形回帰](liner.md)
 	* [線形分類](liner_classifier.md)
 	* [決定木](decision_tree.md)
+	* [ランダムフォレスト](random_forest.md)
+	* [勾配ブースティング](boosting.md)
 *  
 
 
