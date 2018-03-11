@@ -300,6 +300,69 @@ plt.pause(0.5)
 ![](img/plt_hbar.png)
 
 
+### 表示設定
+
+#### タイトル
+
+``` python
+plt.title('Win5 Odds Prediction')
+```
+
+#### 軸ラベル
+
+``` python
+plt.xlabel('X-Axis')
+plt.ylabel('Y-Axis')
+```
+
+#### グリッドの表示
+
+``` python
+plt.grid(True)
+```
+#### 表示リミット
+
+``` python
+plt.ylim(-0.05,1.0)
+plt.xlim(-0.05,1.0)
+
+```
+どちらかだけ（下限 or 上限)を指定することも可能。
+
+``` python
+plt.ylim(-0.05,)
+plt.xlim(-0.05,)
+```
+
+#### グラフサイズ
+``` python
+plt.figure(figsize=(10, 8))
+```
+この指定は、値を設定する前におこなわなければいけない。
+
+
+### 日本語表示
+#### フォントをインストール
+[IPAexフォント ](https://ipafont.ipa.go.jp/node17#jp)
+
+#### matplotlibの設定変更
+``` python
+import matplotlib
+matplotlib.matplotlib_fname()
+```
+で表示されるファイルを編集
+
+```
+font.family : IPAexGothic
+```
+#### フォントキャッシュの削除
+```
+rm ~/.matplotlib/fontList.py3k.cache
+```
+#### 参考
+[【matplotlib】日本語の設定](http://kaisk.hatenadiary.com/entry/2015/02/15/215831)
+
+
 ## sickit learn
 
 ### train_test_split
