@@ -350,10 +350,34 @@ Embarked       889 non-null object
 dtypes: float64(2), int64(5), object(5)
 memory usage: 83.6+ KB
 ```
+### データの入れ替え
+NaN を 0 で入れ替える。
+
+``` python
+import numpy as np
+df = df.replace(np.nan, 0)
+```
+入れ替えたデータフレームが返ってくる（元のデータフレームは変更されない）
+
 ### 平均値
+``` python
+df.Age.mean()
+```
+```
+23.79929292929293
+```
+
+### 中央値
 ``` python
 df.Age.median()
 ```
 ```
 28.0
 ```
+### フィルタリング
+Age が 60 より大きいものを抽出。
+
+``` python
+df[df.Age > 60]
+```
+
