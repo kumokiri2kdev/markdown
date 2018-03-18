@@ -3,7 +3,11 @@
 ## 目次
 1. [Pythonの準備](Python.md)
 
-2. 教師あり学習
+2. scikit-learn
+	* [general](sc-general.md)
+
+ 
+3. 教師あり学習
 	* [k-最近傍法](k-NN.md)
 	* [線形回帰](liner.md)
 	* [線形分類](liner_classifier.md)
