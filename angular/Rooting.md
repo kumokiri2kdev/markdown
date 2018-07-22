@@ -99,6 +99,9 @@ export class WithparamComponent implements OnInit {
 
 ```
 
+パラメーターの参照については、[ActivatesRouteSnapshot](https://angular.io/api/router/ActivatedRouteSnapshot) を参照。
+
+
 withparam.component.html
 
 ``` html: withparam.component.html
@@ -110,6 +113,16 @@ withparam.component.html
 
 ### 動作結果
 ![param](img/param.png)
+
+### query string を取る場合
+``` typescript:withparam.component.ts
+  ngOnInit() {
+    this.param= this.route.snapshot.queryParams.test;
+  }
+```
+
+![param](img/querystring.png)
+
 
 
 
