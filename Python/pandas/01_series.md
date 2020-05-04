@@ -62,7 +62,9 @@ Name: some series, dtype: int64
 ### index (label)
 ``` python
 val = [1, 2, 3, 4, 5]
-ser = pd.Series(val, index=labels)  
+labels = list('aacdf')
+ser = pd.Series(val, index=labels)
+
 print(ser)
 ```
 [出力]
@@ -500,4 +502,26 @@ f    3
 dtype: int64
 ```
 
-###欠損  
+###欠損値
+``` Python
+ser = pd.Series([1, np.nan, 3, 4, np.nan], index=list('abcde'))
+
+ser.isna()
+
+ser.dropna()
+
+```
+[出力]
+```
+a    False
+b     True
+c    False
+d    False
+e     True
+dtype: bool
+
+a    1.0
+c    3.0
+d    4.0
+dtype: float64
+```
