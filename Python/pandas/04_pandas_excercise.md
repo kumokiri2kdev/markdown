@@ -349,18 +349,17 @@ Without-pay            32.714286
 ``` Python
 merged['marital.status'].value_counts().plot(kind='bar')
 ```
-![棒グラフ]('./img/Figure_04_01.png')
-
+<img src="img/Figure_04_01.png" alt="棒グラフ">
 
 ### 円グラフ
 ``` Python
 merged['workclass'].value_counts().plot(kind='pie', figsize=(4,4))
 ```
-![棒グラフ]('./img/Figure_04_02.png')
+<img src="img/Figure_04_02.png" alt="円グラフ">
 
 ### ヒストグラム
 
 ``` Python
 merged['education.num'].plot(kind='hist', bins=15)
 ```
-![棒グラフ]('./img/Figure_04_03.png')
+<img src="img/Figure_04_03.png" alt="ヒストグラム">
