@@ -545,3 +545,42 @@ soccer   NaN  75.500000  75.5
 tennis  79.5  81.000000  80.0
 All     79.5  77.333333  78.2
 ```
+
+## クロス集計
+``` Python
+np.random.seed(seed=1)
+sex = np.random.choice(['M', 'F'], size=10)
+eva = np.random.randint(70, 100, size=10)
+city = np.random.choice(['Tokyo', 'Osaka', 'Sapporo'], size=10)
+div = np.random.choice(['sales', 'hr', 'marketing', 'dev'], size=10)
+dic = {'sex': sex, 'evaluation': eva, 'city': city, 'division':div}
+
+df = pd.DataFrame(dic)
+```
+
+```
+  sex  evaluation     city   division
+0   F          86  Sapporo      sales
+1   F          71    Osaka        dev
+2   M          82  Sapporo        dev
+3   M          77    Tokyo         hr
+4   F          83    Tokyo         hr
+5   F          98  Sapporo        dev
+6   F          76    Tokyo  marketing
+7   F          95    Osaka      sales
+8   F          88  Sapporo  marketing
+9   M          90  Sapporo         hr
+```
+``` Python
+pd.crosstab(index=df['sex'], columns=df['city'])
+```
+```
+city  Osaka  Sapporo  Tokyo
+sex                        
+F         2        3      2
+M         0        2      1
+```
+
+``` Python
+
+```
