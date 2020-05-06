@@ -197,7 +197,214 @@ print(df)
 a  1  2  3
 b  4  5  6
 
-c  d  e
+   c  d  e
 a  1  2  3
 b  4  5  6
+```
+
+### loc属性
+loc 属性により、インデックス名やカラム名で参照可能。
+
+``` Python
+print(df.loc['a',:])
+```
+
+[出力]
+```
+c    1
+d    2
+e    3
+Name: a, dtype: int64
+```
+１列もしくは、１列 だけを指定すると、シリーズになって出てくる。
+複数列であれば、データフレームのまま。
+
+
+列 + 行指定
+```Python
+print(df.loc['b','e'])
+```
+[出力]
+```
+6
+```
+
+### iloc属性
+iloc により、名前ではなく順番で参照可能。
+```Python
+print(df[0:1])
+
+print(df.iloc[0,:])
+
+print(df.iloc[1, 2])
+```
+[出力]
+```
+   c  d  e
+a  1  2  3
+
+c    1
+d    2
+e    3
+
+6
+```
+
+### データフレームの他の属性
+```Python
+print(df.shape)
+print(df.size)
+```
+
+[出力]
+```
+(2, 3)
+6
+```
+
+### 変更・追加
+```Python
+df = pd.DataFrame([[1, 2, 3],[4, 5, 6]]
+df.iloc[1, 1] = 100
+
+print(df)
+
+df['new1'] = 10
+df['new2'] = [5, 6]
+```
+
+[出力]
+```
+   0    1  2
+0  1    2  3
+1  4  100  6
+
+   0    1  2  new1
+0  1    2  3    10
+1  4  100  6    10
+```
+
+
+### append による行の追加
+```python
+val = [i for i in range(7, 12)]
+idx = [0, 1, 2, 'new1', 'new2']
+series_add = pd.Series(val, index=idx, name='new3')
+df = df.append(series_add)  
+
+print(df)
+```
+[出力]
+```
+      0    1  2  new1  new2
+0     1    2  3    10     5
+1     4  100  6    10     6
+new3  7    8  9    10    11
+```
+
+### 行の削除
+行の削除は、drop メソッドを axis = 0 で指定する。
+```Python
+print(df.drop(labels='new3', axis=0))
+# print(df.drop(labels=['new3'], axis=0)) でも同様
+
+print(df.drop(labels=[1, 'new3'], axis=0))
+```
+[出力]
+```
+   0    1  2  new1  new2
+0  1    2  3    10     5
+1  4  100  6    10     6
+
+   0  1  2  new1  new2
+0  1  2  3    10     5
+```
+### 列の削除
+列の削除は、drop メソッドを axis = 1 で指定する。
+
+```Python
+print(df.drop(labels=['new1', 'new2'], axis=1))
+```
+[出力]
+```
+      0    1  2
+0     1    2  3
+1     4  100  6
+new3  7    8  9
+```
+
+### 重複値の削除
+
+```Python
+val = [[1,2,3],[4,5,6],[1,2,3],[3,5,6],[1,2,3]]
+df = pd.DataFrame(val, columns=list('ABC'))
+
+print(df[df.duplicated(keep='first') == False])
+
+print(df.drop_duplicates(keep='first'))
+```
+
+[出力]
+```
+   A  B  C
+0  1  2  3
+1  4  5  6
+3  3  5  6
+
+   A  B  C
+0  1  2  3
+1  4  5  6
+3  3  5  6
+```
+
+### 欠損値
+isna と notna を使うことで、NaN であるかどうかのデータフレームを取り出せる。
+
+``` Python
+val = [[1,2,3],[4,5,np.nan],[1,np.nan,np.nan],[3,5,6],[7,8,9]]
+df = pd.DataFrame(val, columns=list('ABC'))
+
+print(df.isna)  
+
+print(df.notna)
+
+```
+[出力]
+```
+   A    B    C
+0  1  2.0  3.0
+1  4  5.0  NaN
+2  1  NaN  NaN
+3  3  5.0  6.0
+4  7  8.0  9.0
+
+   A    B    C
+0  1  2.0  3.0
+1  4  5.0  NaN
+2  1  NaN  NaN
+3  3  5.0  6.0
+4  7  8.0  9.0
+```
+
+dropna を使用することで、NaN をもつ行・列を削除することができる。
+
+``` ptyhon
+print(df.dropna(axis=0))
+
+print(df.dropna(axis=1))
+```
+
+[出力]
+```
+   A    B    C
+0  1  2.0  3.0
+3  3  5.0  6.0
+4  7  8.0  9.0
+
+   A
+0  1
+1  4
+2  1
+3  3
+4  7
 ```
