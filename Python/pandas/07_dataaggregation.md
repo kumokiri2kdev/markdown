@@ -583,4 +583,27 @@ M         0        2      1
 
 ``` Python
 
+pd.crosstab(index=[df['sex'], df['city']], columns=df['division'])
+
+```
+```
+division     dev  hr  marketing  sales
+sex city                              
+F   Osaka      1   0          0      1
+    Sapporo    1   0          1      1
+    Tokyo      0   1          1      0
+M   Sapporo    1   1          0      0
+    Tokyo      0   1          0      0
+```
+margins も指定可能。
+
+### aggfunc の指定
+``` Python
+pd.crosstab(index=df['sex'], columns=df['city'], values=df['evaluation'], aggfunc=np.mean)
+```
+```
+city  Osaka    Sapporo  Tokyo
+sex                          
+F      83.0  90.666667   79.5
+M       NaN  86.000000   77.0
 ```
