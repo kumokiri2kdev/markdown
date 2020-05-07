@@ -26,6 +26,8 @@
 ### iloc/loc のスライス
 loc は、最後の要素を含むが、iloc は含まない。
 
+### bool 型配列で行を取り出す。
+```df[[True, False, True]]```
 
 
 ## axis
@@ -33,3 +35,10 @@ axis = 0 は、列方向。
 axis = 1 は、行方向。
 
 https://qiita.com/Phoeboooo/items/b464b7df3c64a33caf94
+
+## 欠損値の置換
+置換する値を対応する列名を dict で渡す。
+``` Python
+illing = {'a': 100, 'b': 200, 'c':300}
+df.fillna(value=filling)
+```
