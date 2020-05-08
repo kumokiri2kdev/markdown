@@ -459,6 +459,58 @@ df.query('A > C > B')
 英語  91  78  80
 ```
 
+### 文字列の評価
+
+``` Python
+df = pd.DataFrame({
+    'name': ['荒岩 一味', '荒岩 虹子', '荒岩 まこと', '荒岩 みゆき', '田中 一', '梅田 よしお'],
+    'age': [44, 44, 21, 13, 36, 31],
+    'sex': ['M', 'F', 'M', 'F', 'M', 'M'],
+})
+
+df.query("name == '荒岩 一味'")
+
+df.query("name in ('荒岩 まこと', '荒岩 みゆき')")
+```
+
+```
+       name  age sex
+0  荒岩 一味   44   M
+
+        name  age sex
+2  荒岩 まこと   21   M
+3  荒岩 みゆき   13   F
+```
+python の変数を参照。
+``` Python
+search_name = '田中 一'
+df.query("name == @search_name")
+```
+```
+     name  age sex
+4  田中 一   36   M
+```
+部分一致。
+```Python
+df.query("name.str.startswith('荒岩')", engine='python')
+```
+```
+        name  age sex
+0   荒岩 一味   44   M
+1   荒岩 虹子   44   F
+2  荒岩 まこと   21   M
+3  荒岩 みゆき   13   F
+```
+- startswith
+- endswith
+- contains
+などが使用可能。
+
+<font color="Red">*column 名に 'class' を使ってしまうと、評価できない。*</font>
+
+
+
+
 ### 複数の値によるデータ参照
 ``` Python
 df.query('A == [76, 91]')
@@ -472,5 +524,3 @@ df.query('A == [76, 91]')
 * Indexing and Selecting Data
 
   https://pandas.pydata.org/pandas-docs/version/0.22/indexing.html
-
-  
