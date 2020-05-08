@@ -29,6 +29,9 @@ loc は、最後の要素を含むが、iloc は含まない。
 ### bool 型配列で行を取り出す。
 ```df[[True, False, True]]```
 
+これも、bool 型配列での行の取り出しと原理は同じ。
+
+```df[df['a'] < 10]  ```
 
 ## axis
 axis = 0 は、列方向。
@@ -42,3 +45,26 @@ https://qiita.com/Phoeboooo/items/b464b7df3c64a33caf94
 illing = {'a': 100, 'b': 200, 'c':300}
 df.fillna(value=filling)
 ```
+
+## インデックス
+インデックスを numpy 配列として取り出す。
+``` df.index.values```
+
+インデックスを振り直す
+``` df.reset_index(drop=True) ```
+
+## マージ
+``` pd.merge(leftdf, rightdf, on='key') ```
+
+## グループ
+### グルーピング
+カラム名（列名）でグルーピング。　```  df.groupby('class') ```
+
+
+
+## 分析
+
+### データ数
+``` df.groupedby('hoge').count()```
+### 平均値
+``` df.groupedby('hoge').mean()```

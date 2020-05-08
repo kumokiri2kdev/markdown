@@ -135,3 +135,22 @@ print(df)
 8  NaN  NaN  NaN NaN
 9  7.0  8.0  9.0 NaN
 ```
+#### reset_index
+reset_index により、インデックスが再度自動採番される。
+
+``` Python
+
+val = np.arange(1, 10).reshape((3,-1))
+df = pd.DataFrame(val, index=[0, 2, 4], columns=['a', 'b', 'c'])
+
+df.reset_index(drop=True)
+```
+
+```
+   a  b  c
+0  1  2  3
+1  4  5  6
+2  7  8  9
+```
+
+drop を指定しないと、元々の インデックスが残ってしまう。
