@@ -291,6 +291,23 @@ df['new2'] = [5, 6]
 0  1    2  3    10
 1  4  100  6    10
 ```
+### 追加した列に値を一括で代入
+``` Python
+df = pd.DataFrame(np.arange(9).reshape(3,-1), columns = list('abc'))
+df['d'] = df['a'] + df['b']
+```
+```
+   a  b  c
+0  0  1  2
+1  3  4  5
+2  6  7  8
+
+
+   a  b  c   d
+0  0  1  2   1
+1  3  4  5   7
+2  6  7  8  13
+```
 
 
 ### append による行の追加

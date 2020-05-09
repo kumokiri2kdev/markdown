@@ -35,7 +35,7 @@ ignore_index を指定すると、インデックスが再付与される。
 ## マージ
 マージは、二つのデータフレームの同一キーを基にデータを連結する動作。
 
-
+### データフレームのマージ
 ``` Python
 leftdf = pd.DataFrame({
   'key': ['k0', 'k1', 'k2'],
@@ -58,3 +58,11 @@ pd.merge(leftdf, rightdf, on='key')
 1  k1  a1  b1  c1  d1
 2  k2  a2  b2  c2  d2
 ```
+
+### シリーズのマージ
+シリーズ同士でも同様にマージ可能。
+on には、インデックスにを指定。
+``` Python
+pd.merge(leftser, rightser, on='時期', how='outer')
+```
+how を指定しないと、両方のインデックスに存在しない行は削除される。

@@ -46,6 +46,9 @@ illing = {'a': 100, 'b': 200, 'c':300}
 df.fillna(value=filling)
 ```
 
+## 列を新規に追加してデータをいれる
+``` df['new'] = df['exist_a'] + df['exist_b'] ```
+
 ## インデックス
 インデックスを numpy 配列として取り出す。
 ``` df.index.values```
@@ -68,3 +71,12 @@ df.fillna(value=filling)
 ``` df.groupedby('hoge').count()```
 ### 平均値
 ``` df.groupedby('hoge').mean()```
+
+
+## ロード・セーブ
+### picle
+``` df.to_pickle(ファイル名) ```
+
+
+### excel
+``` df.to_excel({ファイル名}, sheet_name={シート名}) ``` ファイル名は *.xlsx

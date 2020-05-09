@@ -144,6 +144,30 @@ f  6.0  7.0  8
 ```
 
 ## 欠損値の置換
+
+### ゼロに変換
+
+
+### カラム毎の値の指定
+``` Python
+val = np.arange(9).reshape(3, -1)
+df = pd.DataFrame(val, columns=list('abc'), index=list('def'))
+df.loc['d', 'a'], df.loc['e', 'b'] = np.nan, np.nan
+
+df.fillna(value=0)
+```
+```
+     a    b  c
+d  NaN  1.0  2
+e  3.0  NaN  5
+f  6.0  7.0  8
+
+     a    b  c
+d  0.0  1.0  2
+e  3.0  0.0  5
+f  6.0  7.0  8
+```
+
 ``` Python
 val = np.arange(9).reshape(3, -1)
 df = pd.DataFrame(val, columns=list('abc'), index=list('def'))

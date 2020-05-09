@@ -164,3 +164,41 @@ df.pop('c')
 2    10
 Name: c, dtype: int64
 ```
+
+
+## データの変更
+演算結果を代入することで、データを一律で変更可能。
+``` Python
+val = np.arange(0,12).reshape(3,4)
+df = pd.DataFrame(val, columns=list('abcd'))   
+
+df['c'] = df['c'] * 2
+
+```
+
+```
+   a  b   c   d
+0  0  1   2   3
+1  4  5   6   7
+2  8  9  10  11
+
+   a  b   c   d
+0  0  1   4   3
+1  4  5  12   7
+2  8  9  20  11
+
+```
+
+### roundメソッド
+round メソッドを使うことで、小数点データを切り捨てることが可能。
+
+``` Python
+df['時期'] = df['時期'].round()  
+```   
+
+### 型キャスト
+astype メソッドを使うことで、型変換が可能。
+
+``` Python
+df['時期'] = df['時期'].astype('int64')
+```
