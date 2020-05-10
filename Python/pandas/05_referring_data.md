@@ -258,7 +258,7 @@ df.iloc[2:4]
 ```
 
 ``` Python
-df.iloc[:, 1:4
+df.iloc[:, 1:4]
 ```
 ```
      b   c   d
