@@ -46,6 +46,11 @@ illing = {'a': 100, 'b': 200, 'c':300}
 df.fillna(value=filling)
 ```
 
+ゼロをいれる。'''df.fillna(value=0)'''
+
+## キャスト
+```df['時期'] = df['時期'].astype('int64')```
+
 ## 列を新規に追加してデータをいれる
 ``` df['new'] = df['exist_a'] + df['exist_b'] ```
 
@@ -75,7 +80,8 @@ df.fillna(value=filling)
 
 ## ロード・セーブ
 ### picle
-``` df.to_pickle(ファイル名) ```
+``` df = pd.read_pickle({ファイル名}))```
+``` df.to_pickle({ファイル名}) ```
 
 
 ### excel
