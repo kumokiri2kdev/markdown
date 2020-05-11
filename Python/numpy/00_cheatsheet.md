@@ -14,6 +14,13 @@ np.concatenate([x, y], axis=1)
 np.hstack([x, y])
 ```
 
+１次元で結合する場合。
+``` PythonTips
+np.append(x, y)
+```
+※ ２次元以上の配列も引き延ばされて、１次元に変換される。
+
+
 列方向に結合する。
 ``` python
 np.concatenate([x, y])
