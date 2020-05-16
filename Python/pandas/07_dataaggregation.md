@@ -436,6 +436,41 @@ dtype: object
 
 
 ## ピボットテーブル
+
+### マトリクス変形
+```Python
+ import pandas as pd
+
+ user_data = [
+  [1, 1, 10], [1, 2, 5],[1, 3, 6],[1, 6, 4],[2, 2, 10],[2, 6, 4],[2, 6, 3]
+  ]
+
+  df = pd.DataFrame(user_data, columns=['user_id', 'item_id', 'rating'])
+```
+```
+user_id  item_id  rating
+0        1        1      10
+1        1        2       5
+2        1        3       6
+3        1        6       4
+4        2        2      10
+5        2        6       4
+6        2        6       3
+```
+このテーブルを、ユーザー毎の行とアイテムごとの列のマトリクスにして Rating をデータとしてまとめるには、
+
+``` python
+pivot = pd.pivot_table(df, index='user_id', columns='item_id', values='rating')
+```
+```
+item_id     1     2    3    6
+user_id                      
+1        10.0   5.0  6.0  4.0
+2         NaN  10.0  NaN  3.5
+```
+
+### 集約
+
 ```Python
 np.random.seed(seed=1)
 scores = np.random.randint(70, 100, size=25).reshape(5, -1)
