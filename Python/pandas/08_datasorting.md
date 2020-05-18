@@ -161,7 +161,7 @@ df.nsmallest(3, 'eng')
 ```
 
 ## 並べ替え
-ソートではなく、任意の順番に並べ替えたい場合。
+ソートではなく、任意の順番に列を並べ替えたい場合。
 
 ### カラムを指定しての並べ替え
 メソッドでは無いが、下記で代用できる。
@@ -182,4 +182,34 @@ df = df[['b','c','a']]
 0  1  2  0
 1  4  5  3
 2  7  8  6
+```
+
+### apply を使用した行の並べ替え
+
+``` python
+val = [['Alice', 24, 'NY', 64], ['Bob', 42, 'CA', 92], ['Charlie', 18, 'CA', 70],['Dave', 68, 'TX', 70],['Ellen',24, 'CA', 88],['Frank', 30, 'NY', 57]]
+df = pd.DataFrame(val, columns=['name', 'age', 'state', 'point'])
+
+l_order = ['Charlie', 'Alice', 'Dave', 'Bob']  
+df['order'] = df['name'].apply(lambda x: l_order.index(x) if x in l_order else -1)
+df = df.sort_values('order')
+df = df.drop(columns='order')
+```
+
+```
+      name  age state  point
+0    Alice   24    NY     64
+1      Bob   42    CA     92
+2  Charlie   18    CA     70
+3     Dave   68    TX     70
+4    Ellen   24    CA     88
+5    Frank   30    NY     57
+
+      name  age state  point
+4    Ellen   24    CA     88
+5    Frank   30    NY     57
+2  Charlie   18    CA     70
+0    Alice   24    NY     64
+3     Dave   68    TX     70
+1      Bob   42    CA     92
 ```
