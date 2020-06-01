@@ -13,3 +13,14 @@ df = pd.read_csv('2020_comparison.csv')
 ```` python
 df = pd.read_csv('2020_comparison.csv', encoding='SHIFT-JIS')  
 ````
+
+区切り文字の指定
+``` python
+df = pd.read_csv('xxxx.csv', sep=';')
+```
+
+### Read JSON
+``` python
+pd.read_json('../data/out5.json', typ='frame')
+```
+typ は、frame (DataFrame) か series (Series)。
