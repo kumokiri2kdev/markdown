@@ -112,7 +112,6 @@ df.loc['d', 'a'], df.loc['e', 'b'] = np.nan, np.nan
 
 df.dropna(axis=0)
 
-df.dropna(axis=1)
 ```
 ```
      a    b  c
@@ -122,6 +121,15 @@ f  6.0  7.0  8
 
      a    b  c
 f  6.0  7.0  8
+```
+
+axis のデフォルトは 0
+
+### 欠損値のある列を取り除く
+``` python
+df.dropna(axis=1)
+```
+```
 
    c
 d  2

@@ -369,7 +369,7 @@ Name: a, dtype: bool
 ~ のあとで、データフレームを () でくくる必要ある。
 
 ## where メソッド
-whereメソッドを使うと、条件に満たない要素は NaNとなる。
+whereメソッドを使うと、条件を満たすデータはそのまま据え置き、条件に満たない要素は NaN に変換した Series/DataFrame を返す。
 
 ```Python
 ser = pd.Series([1, 2, 3, 4, 5])
@@ -399,7 +399,7 @@ df.where(df%2 == 0)
 ```
 
 ### 値の入れ替え
-NaN を別の値に変更する。
+others オプションを指定すると、条件に満たない要素を NaN ではなく別の値に変更することができる。
 ``` Python
 df.where(df%2 == 0, other=-1)
 ```
