@@ -35,3 +35,22 @@ df['class'] = df['class'].str.replace(pat='組',repl='')
 2   2-3   佐藤君
 3   2-4   内山君
 ```
+
+### 正規表現
+
+``` python
+df['コース'].unique()
+
+```
+```                                                   
+array(['ダート', '芝・右 外', '芝・左', '芝・右', '芝・左 外', '芝・直'], dtype=object)
+```
+
+``` python
+df['コース'] = df['コース'].str.replace(pat='・.*', repl='')
+
+df['コース'].unique()  
+```
+```
+array(['ダート', '芝'], dtype=object)
+```
